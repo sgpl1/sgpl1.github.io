@@ -1,0 +1,51 @@
+body {
+    /*加载背景图：图片地址 不平铺 */
+    background: url(../1.gif) no-repeat center center;
+    /* 让背景图基于容器大小伸缩 */
+    background-size: cover;
+    /* background-attachment设置背景图像是否固定或者随着页面的其余部分滚动。
+        scroll 背景图片随着页面的滚动而滚动，这是默认的。
+         fixed 背景图片不会随着页面的滚动而滚动。
+          local 背景图片会随着元素内容的滚动而滚动。*/
+    background-attachment: fixed;
+    backdrop-filter: blur(10px);
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 100%;
+    text-align: center;
+}
+
+
+.title {
+    display: inline-block;
+    font-size: 5em;
+    font-weight: 700;
+    background: linear-gradient(0.25turn, #c21500, #ffc500);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+}
+
+.b {
+    background: transparent;
+    border: 2px solid;
+    border-color: white;
+    border-radius: 30px; 
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+
+.b:hover {
+    
+    background-color: white;
+    color: black;
+    
+}
