@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 - TokiFloat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>博客</h1>
+            <p>分享技术心得与生活随笔</p>
+        </div>
+    </header>
+    
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html" class="active">博客</a></li>
+                <li><a href="projects.html">项目</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="blog-posts">
+            <article class="blog-post" id="post1">
+                <h2>Python 自动化脚本实践</h2>
+                <div class="post-meta">
+                    <span class="post-date">2024-01-15</span>
+                    <span class="post-category">技术</span>
+                </div>
+                <div class="post-content">
+                    <p>在日常工作中，我们经常需要处理一些重复性的任务，比如文件整理、数据处理、网页爬取等。Python 作为一种强大的脚本语言，非常适合用来编写自动化脚本。</p>
+                    <h3>常用库推荐</h3>
+                    <ul>
+                        <li><strong>os/shutil</strong> - 文件和目录操作</li>
+                        <li><strong>requests</strong> - HTTP 请求处理</li>
+                        <li><strong>pandas</strong> - 数据处理和分析</li>
+                        <li><strong>selenium</strong> - 浏览器自动化</li>
+                    </ul>
+                    <h3>简单示例</h3>
+                    <pre><code>
+import os
+import shutil
+
+# 批量重命名文件
+def batch_rename(directory, prefix):
+    for i, filename in enumerate(os.listdir(directory)):
+        new_name = f"{prefix}_{i}.txt"
+        os.rename(os.path.join(directory, filename), 
+                  os.path.join(directory, new_name))
+                    </code></pre>
+                </div>
+            </article>
+            
+            <article class="blog-post" id="post2">
+                <h2>Minecraft 红石电路设计心得</h2>
+                <div class="post-meta">
+                    <span class="post-date">2024-01-10</span>
+                    <span class="post-category">游戏</span>
+                </div>
+                <div class="post-content">
+                    <p>Minecraft 的红石系统是游戏中最有趣的机制之一。通过红石粉、红石火把、比较器等组件，我们可以构建各种复杂的电路。</p>
+                    <h3>基础电路</h3>
+                    <ul>
+                        <li>门电路：与门、或门、非门</li>
+                        <li>存储电路：RS 锁存器、T 触发器</li>
+                        <li>时序电路：脉冲发生器、时钟</li>
+                    </ul>
+                    <h3>实用建议</h3>
+                    <p>1. 规划电路布局时留出足够空间</p>
+                    <p>2. 使用不同颜色的羊毛来标记不同功能区域</p>
+                    <p>3. 复杂电路建议先在单人世界测试</p>
+                </div>
+            </article>
+            
+            <article class="blog-post" id="post3">
+                <h2>前端开发中的动画优化技巧</h2>
+                <div class="post-meta">
+                    <span class="post-date">2024-01-05</span>
+                    <span class="post-category">技术</span>
+                </div>
+                <div class="post-content">
+                    <p>网页动画可以提升用户体验，但不当的实现会导致性能问题。以下是一些优化建议：</p>
+                    <h3>CSS 动画优化</h3>
+                    <ul>
+                        <li>使用 transform 和 opacity 属性进行动画，这些属性可以触发 GPU 加速</li>
+                        <li>避免在动画中使用 box-shadow、border-radius 等复杂属性</li>
+                        <li>使用 will-change 属性提前告知浏览器即将进行的动画</li>
+                    </ul>
+                    <h3>JavaScript 动画</h3>
+                    <p>使用 requestAnimationFrame 替代 setTimeout/setInterval 来实现更流畅的动画。</p>
+                </div>
+            </article>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 TokiFloat. 保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>

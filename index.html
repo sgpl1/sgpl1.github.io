@@ -4,366 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人主页 - TokiFloat</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            opacity: 0.3;
-        }
-        
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .profile-section {
-            text-align: center;
-            padding: 2rem 0;
-        }
-        
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            display: block;
-            border: 5px solid white;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            object-fit: cover;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .profile-img:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
-        }
-        
-        section {
-            padding: 3rem 0;
-            margin: 1rem 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: sectionFadeIn 0.8s ease-out forwards;
-        }
-        
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        
-        @keyframes sectionFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        h2 {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            color: #667eea;
-            font-size: 2rem;
-            position: relative;
-        }
-        
-        h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: #667eea;
-            margin: 0.5rem auto;
-            border-radius: 2px;
-            transform: scaleX(0);
-            animation: lineGrow 0.6s ease-out 0.5s forwards;
-        }
-        
-        @keyframes lineGrow {
-            to {
-                transform: scaleX(1);
-            }
-        }
-        
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-        
-        .about-content p {
-            margin-bottom: 1rem;
-            transition: color 0.4s ease;
-        }
-        
-        .about-content p:hover {
-            color: #667eea;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .skill-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: default;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s;
-        }
-        
-        .skill-tag:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        .skill-tag:hover::before {
-            left: 100%;
-        }
-        
-        .projects {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .project-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #667eea;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.4s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            background: #fff;
-        }
-        
-        .project-card:hover::before {
-            transform: scaleY(1);
-        }
-        
-        .project-card h3 {
-            color: #333;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-        
-        .project-card:hover h3 {
-            color: #667eea;
-        }
-        
-        .project-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .project-tag {
-            background: #e9ecef;
-            color: #495057;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover .project-tag {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .contact-info {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .contact-info p {
-            margin: 1rem 0;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .contact-info p:hover {
-            transform: translateX(5px);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .social-link {
-            color: #667eea;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-        }
-        
-        .social-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #667eea;
-            transition: width 0.3s ease;
-        }
-        
-        .social-link:hover {
-            color: #764ba2;
-            transform: translateY(-3px);
-        }
-        
-        .social-link:hover::after {
-            width: 100%;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            background: #333;
-            color: white;
-        }
-        
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            header p {
-                font-size: 1.1rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .about-content {
-                padding: 0 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>你好，我是 sgpl</h1>
-            <p>全栈开发工程师 | 设计爱好者 | 终身学习者</p>
+            <h1>你好，我是 TokiFloat</h1>
+            <p>全栈开发工程师 | Python 爱好者 | Minecraft 玩家</p>
         </div>
     </header>
+    
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="projects.html">项目</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
     
     <div class="container">
         <section id="about">
@@ -391,27 +51,19 @@
             </div>
         </section>
         
-        <section id="projects">
-            <h2>项目作品</h2>
-            <div class="projects">
-                <div class="project-card">
-                    <h3>个人博客系统</h3>
-                    <p>基于 React 和 Node.js 构建的现代化博客平台，支持 Markdown 编辑、标签分类和响应式设计。</p>
-                    <div class="project-tags">
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">Node.js</span>
-                        <span class="project-tag">MongoDB</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>任务管理应用</h3>
-                    <p>简洁高效的任务管理工具，帮助用户更好地组织工作和生活中的待办事项。</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Vue.js</span>
-                        <span class="project-tag">Vuex</span>
-                        <span class="project-tag">LocalStorage</span>
-                    </div>
-                </div>
+        <section id="latest-posts">
+            <h2>最新文章</h2>
+            <div class="posts-preview">
+                <article class="post-preview">
+                    <h3><a href="blog.html#post1">Python 自动化脚本实践</a></h3>
+                    <p>如何使用 Python 编写高效的自动化脚本来提升工作效率...</p>
+                    <span class="post-date">2024-01-15</span>
+                </article>
+                <article class="post-preview">
+                    <h3><a href="blog.html#post2">Minecraft 红石电路设计心得</a></h3>
+                    <p>分享一些有趣的红石电路设计和建筑思路...</p>
+                    <span class="post-date">2024-01-10</span>
+                </article>
             </div>
         </section>
         
@@ -422,9 +74,8 @@
                 <p>📱 电话: +86 138 0013 8000</p>
                 <p>📍 位置: 中国</p>
                 <div class="social-links">
-                    <a href="#" class="social-link">GitHub</a>
-                    <a href="#" class="social-link">LinkedIn</a>
-                    <a href="#" class="social-link">Twitter</a>
+                    <a href="https://github.com/sgpl1" class="social-link" target="_blank">GitHub</a>
+                    <a href="https://x.com/sgpl666" class="social-link" target="_blank">X (Twitter)</a>
                 </div>
             </div>
         </section>
