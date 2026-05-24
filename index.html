@@ -50,6 +50,7 @@
             margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
+            animation: fadeInUp 1s ease-out;
         }
         
         header p {
@@ -57,6 +58,18 @@
             opacity: 0.9;
             position: relative;
             z-index: 1;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .profile-section {
@@ -73,6 +86,12 @@
             border: 5px solid white;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
         }
         
         section {
@@ -81,6 +100,21 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: sectionFadeIn 0.8s ease-out forwards;
+        }
+        
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes sectionFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         h2 {
@@ -99,6 +133,14 @@
             background: #667eea;
             margin: 0.5rem auto;
             border-radius: 2px;
+            transform: scaleX(0);
+            animation: lineGrow 0.6s ease-out 0.5s forwards;
+        }
+        
+        @keyframes lineGrow {
+            to {
+                transform: scaleX(1);
+            }
         }
         
         .about-content {
@@ -110,6 +152,11 @@
         
         .about-content p {
             margin-bottom: 1rem;
+            transition: color 0.4s ease;
+        }
+        
+        .about-content p:hover {
+            color: #667eea;
         }
         
         .skills {
@@ -128,12 +175,30 @@
             border-radius: 25px;
             font-size: 1rem;
             font-weight: 500;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
         }
         
         .skill-tag:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
         }
         
         .projects {
@@ -147,17 +212,42 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             border-left: 4px solid #667eea;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
         }
         
         .project-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            background: #fff;
+        }
+        
+        .project-card:hover::before {
+            transform: scaleY(1);
         }
         
         .project-card h3 {
             color: #333;
             margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .project-card:hover h3 {
+            color: #667eea;
         }
         
         .project-card p {
@@ -177,6 +267,13 @@
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-tag {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
         }
         
         .contact-info {
@@ -192,6 +289,11 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-info p:hover {
+            transform: translateX(5px);
         }
         
         .social-links {
@@ -205,11 +307,28 @@
             color: #667eea;
             font-size: 1.5rem;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+        
+        .social-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
         }
         
         .social-link:hover {
             color: #764ba2;
+            transform: translateY(-3px);
+        }
+        
+        .social-link:hover::after {
+            width: 100%;
         }
         
         footer {
@@ -251,15 +370,16 @@
             <h2>关于我</h2>
             <div class="about-content">
                 <p>我是一名热爱技术的开发者，专注于创建优雅且实用的数字体验。我相信代码不仅是工具，更是艺术的一种表达形式。</p>
-                <p>在工作中，我注重用户体验和代码质量，喜欢将复杂的问题简化。在闲暇时间，我喜欢阅读、旅行和探索新技术。</p>
+                <p>在工作中，我注重用户体验和代码质量，喜欢将复杂的问题简化。在闲暇时间，我喜欢玩 Minecraft、阅读、旅行和探索新技术。</p>
+                <p>我精通 Python 语言，经常使用它进行数据分析、自动化脚本编写和后端开发。</p>
             </div>
         </section>
         
         <section id="skills">
             <h2>技能专长</h2>
             <div class="skills">
-                <span class="skill-tag">JavaScript</span>
                 <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
                 <span class="skill-tag">React</span>
                 <span class="skill-tag">Vue.js</span>
                 <span class="skill-tag">Node.js</span>
