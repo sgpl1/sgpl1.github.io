@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目 - TokiFloat</title>
+    <title>项目作品 - TokiFloat ✨</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>项目作品</h1>
-            <p>展示我的一些开发作品</p>
+    <!-- 头部 Hero 区域 -->
+    <header class="hero-section" style="padding: 5rem 0 4rem;">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">✨ My Creations ✨</span>
+                <h1 class="hero-title">项目作品 / <span class="highlight">Projects</span></h1>
+                <p class="hero-subtitle">这里记录了我的一些奇思妙想与开发实践 🛠️</p>
+            </div>
+            <div class="hero-avatar-wrapper" style="height: 200px;">
+                <img src="https://api.vvhan.com/api/wallpaper/acg" alt="Random Anime" class="hero-anime-img">
+                <div class="anime-deco">✨ Projects ✨</div>
+            </div>
         </div>
     </header>
     
+    <!-- 导航栏 -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container nav-container">
+            <div class="logo">TokiFloat<span class="logo-dot">.dev</span></div>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="blog.html">博客</a></li>
@@ -25,48 +35,54 @@
         </div>
     </nav>
     
-    <div class="container">
-        <section id="projects">
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Minecraft (Java/基岩) 版本监控</h3>
-                    <p>AstrBot 的 Minecraft (Java/基岩) 版本更新监控与自动推送插件</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-
+    <div class="container main-content">
+        <section id="projects" class="info-section">
+            <div class="section-header">
+                <h2>我的作品集 / Portfolio 🌸</h2>
+                <p class="section-subtitle">用代码连接现实，创造好玩又实用的工具</p>
+            </div>
+            
+            <div class="posts-grid">
+                <!-- 项目 1 -->
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span class="post-tag">Python</span>
+                        <span class="post-tag">Minecraft</span>
                     </div>
-                    <a href="https://github.com/sgpl1/astrbot_plugin_mcv_rss" class="project-link" target="_blank">查看项目</a>
+                    <h3><a href="https://github.com/sgpl1/astrbot_plugin_mcv_rss" target="_blank">Minecraft 版本监控插件</a></h3>
+                    <p>基于 AstrBot 的 Minecraft (Java/基岩) 版本更新监控与自动推送插件，让你第一时间获取方块世界的最新动态。</p>
+                    <a href="https://github.com/sgpl1/astrbot_plugin_mcv_rss" class="read-more" target="_blank">查看项目 &rarr;</a>
                 </div>
                 
-                <div class="project-card">
-                    <h3>python-img2structure</h3>
-                    <p>把图片转为.mcstruture文件,可以直接导入进我的世界基岩版</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-
+                <!-- 项目 2 -->
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span class="post-tag">Python</span>
+                        <span class="post-tag">图像处理</span>
                     </div>
-                    <a href="https://github.com/sgpl1/python-img2structure" class="project-link" target="_blank">查看项目</a>
-                </div>
-                                <div class="project-card">
-                    <h3>sgpl1.github.io</h3>
-                    <p>即如你所见的这个网站</p>
-                    <div class="project-tags">
-                        <span class="project-tag">HTML/CSS</span>
-                        <span class="project-tag">JavaScript</span>
-
-                    </div>
-                    <a href="https://github.com/sgpl1/sgpl1.github.io" class="project-link" target="_blank">查看项目</a>
+                    <h3><a href="https://github.com/sgpl1/python-img2structure" target="_blank">python-img2structure</a></h3>
+                    <p>一个神奇的工具！能将任意图片转换为 .mcstructure 结构文件，一键导入我的世界基岩版，在游戏里还原精美像素画。</p>
+                    <a href="https://github.com/sgpl1/python-img2structure" class="read-more" target="_blank">查看项目 &rarr;</a>
                 </div>
                 
-
-
+                <!-- 项目 3 -->
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span class="post-tag">HTML/CSS</span>
+                        <span class="post-tag">JavaScript</span>
+                    </div>
+                    <h3><a href="https://github.com/sgpl1/sgpl1.github.io" target="_blank">个人主页 (sgpl1.github.io)</a></h3>
+                    <p>即你当前所看到的这个充满二次元萌系风格的个人主页，采用现代响应式设计，完美适配各种设备屏幕。</p>
+                    <a href="https://github.com/sgpl1/sgpl1.github.io" class="read-more" target="_blank">查看项目 &rarr;</a>
+                </div>
             </div>
         </section>
     </div>
     
     <footer>
-        <div class="container">
-            <p>&copy; 2026 TokiFloat. 保留所有权利。</p>
+        <div class="container footer-container">
+            <p>&copy; 2026 TokiFloat. Designed &amp; Built with ❤️</p>
+            <p class="footer-sub">用代码连接世界，保持热爱，奔赴山海。</p>
         </div>
     </footer>
 </body>
