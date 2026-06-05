@@ -52,7 +52,7 @@
                     <p>Python 解释器在执行代码时，会先将源码解析为抽象语法树（Abstract Syntax Tree）。通过 Python 内置的 <code>ast</code> 模块，我们可以在代码运行期拦截并修改这个树状结构，然后再将其编译回字节码执行。</p>
                     
                     <h3>2. 核心实现：AST 节点转换器</h3>
-                    <p>我们可以继承 <code>ast.NodeTransformer</code>，在遍历语法树时，动态寻找特定的函数定义，并在其头部或尾部插入我们自定义的 AST 节点：</p>
+                    <p>我们可以继承 <code>ast.NodeTransformer</code>，在遍历语法树时，动态寻找特定的函数定义，并在其头部或尾部插入我们自定义 of AST 节点：</p>
                     
                     <pre><code>import ast
 import inspect
@@ -138,7 +138,7 @@ import socket
 class EventLoop:
     def __init__(self):
         self.ready_tasks = []  # 就绪任务队列
-        self.read_waiting = {} # socket -> waiting Task 的映射
+        self.read_waiting = {} # socket -&gt; waiting Task 的映射
 
     def create_task(self, coro):
         task = Task(coro)
