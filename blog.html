@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客 - TokiFloat</title>
+    <title>深度思考 - TokiFloat ✨</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>博客</h1>
-            <p>分享技术心得与生活随笔</p>
+    <!-- 头部 Hero 区域 -->
+    <header class="hero-section" style="padding: 5rem 0 4rem;">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">✨ Tech &amp; Thoughts ✨</span>
+                <h1 class="hero-title">深度思考 / <span class="highlight">Blog</span></h1>
+                <p class="hero-subtitle">探索底层原理，分享硬核干货与极客技术 📝</p>
+            </div>
+            <div class="hero-avatar-wrapper" style="height: 200px;">
+                <img src="https://api.vvhan.com/api/wallpaper/acg" alt="Random Anime" class="hero-anime-img">
+                <div class="anime-deco">✨ Read ✨</div>
+            </div>
         </div>
     </header>
     
+    <!-- 导航栏 -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container nav-container">
+            <div class="logo">TokiFloat<span class="logo-dot">.dev</span></div>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="blog.html" class="active">博客</a></li>
@@ -25,83 +35,179 @@
         </div>
     </nav>
     
-    <div class="container">
+    <div class="container main-content">
         <section id="blog-posts">
-            <article class="blog-post" id="post1">
-                <h2>Python 自动化脚本实践</h2>
-                <div class="post-meta">
-                    <span class="post-date">2024-01-15</span>
-                    <span class="post-category">技术</span>
+            <!-- 文章 1 -->
+            <article class="info-section blog-post" id="post1">
+                <div class="post-header">
+                    <span class="post-tag">Python</span>
+                    <span class="post-tag">元编程</span>
+                    <span class="post-date">📅 2024-01-15</span>
                 </div>
+                <h2 class="post-title">黑魔法：利用 AST 与元编程实现运行时代码注入</h2>
                 <div class="post-content">
-                    <p>在日常工作中，我们经常需要处理一些重复性的任务，比如文件整理、数据处理、网页爬取等。Python 作为一种强大的脚本语言，非常适合用来编写自动化脚本。</p>
-                    <h3>常用库推荐</h3>
-                    <ul>
-                        <li><strong>os/shutil</strong> - 文件和目录操作</li>
-                        <li><strong>requests</strong> - HTTP 请求处理</li>
-                        <li><strong>pandas</strong> - 数据处理和分析</li>
-                        <li><strong>selenium</strong> - 浏览器自动化</li>
-                    </ul>
-                    <h3>简单示例</h3>
-                    <pre><code>
-import os
-import shutil
+                    <p>在 Python 的世界里，装饰器和元类已经能帮我们完成大部分的动态代理工作。但如果你想在<strong>不修改目标函数源码、不包裹装饰器</strong>的前提下，动态地在函数体中间插入一段监控逻辑，该怎么做？答案是：直接操作 <strong>AST（抽象语法树）</strong> 并重构字节码。</p>
+                    
+                    <h3>1. 什么是 AST？</h3>
+                    <p>Python 解释器在执行代码时，会先将源码解析为抽象语法树（Abstract Syntax Tree）。通过 Python 内置的 <code>ast</code> 模块，我们可以在代码运行期拦截并修改这个树状结构，然后再将其编译回字节码执行。</p>
+                    
+                    <h3>2. 核心实现：AST 节点转换器</h3>
+                    <p>我们可以继承 <code>ast.NodeTransformer</code>，在遍历语法树时，动态寻找特定的函数定义，并在其头部或尾部插入我们自定义的 AST 节点：</p>
+                    
+                    <pre><code>import ast
+import inspect
 
-# 批量重命名文件
-def batch_rename(directory, prefix):
-    for i, filename in enumerate(os.listdir(directory)):
-        new_name = f"{prefix}_{i}.txt"
-        os.rename(os.path.join(directory, filename), 
-                  os.path.join(directory, new_name))
-                    </code></pre>
+class CodeInjector(ast.NodeTransformer):
+    def visit_FunctionDef(self, node):
+        # 寻找目标函数
+        if node.name == "target_function":
+            # 构造一个 print("Injected successfully! ✨") 的 AST 节点
+            log_node = ast.Expr(
+                value=ast.Call(
+                    func=ast.Name(id="print", ctx=ast.Load()),
+                    args=[ast.Constant(value="[AST Magic] Code Injected successfully! ✨")],
+                    keywords=[]
+                )
+            )
+            # 将新节点插入到函数体最前面
+            node.body.insert(0, log_node)
+        return node</code></pre>
+
+                    <h3>3. 动态编译与替换</h3>
+                    <p>通过 <code>inspect.getsource</code> 获取源码，利用 <code>ast.parse</code> 生成树，修改后用内置的 <code>compile</code> 编译，最后动态替换函数的 <code>__code__</code> 属性：</p>
+                    <pre><code>def target_function():
+    print("Executing original logic...")
+
+# 1. 获取源码并解析为 AST
+source = inspect.getsource(target_function)
+tree = ast.parse(source)
+
+# 2. 注入代码
+transformer = CodeInjector()
+modified_tree = transformer.visit(tree)
+ast.fix_missing_locations(modified_tree)
+
+# 3. 编译并替换字节码
+compiled_code = compile(modified_tree, filename="&lt;ast_magic&gt;", mode="exec")
+namespace = {}
+exec(compiled_code, namespace)
+
+# 替换原函数的字节码
+target_function.__code__ = namespace["target_function"].__code__
+
+# 测试运行
+target_function()
+# 输出:
+# [AST Magic] Code Injected successfully! ✨
+# Executing original logic...</code></pre>
+                    <p>这种技术在编写无侵入式 APM 监控、热更新补丁以及高级 AOP 框架时非常有用。当然，由于它直接修改了底层字节码，使用时需要格外小心！</p>
                 </div>
             </article>
             
-            <article class="blog-post" id="post2">
-                <h2>Minecraft 红石电路设计心得</h2>
-                <div class="post-meta">
-                    <span class="post-date">2024-01-10</span>
-                    <span class="post-category">游戏</span>
+            <!-- 文章 2 -->
+            <article class="info-section blog-post" id="post2">
+                <div class="post-header">
+                    <span class="post-tag">异步编程</span>
+                    <span class="post-tag">底层原理</span>
+                    <span class="post-date">📅 2024-01-10</span>
                 </div>
+                <h2 class="post-title">手写事件循环：从零实现 Python 异步协程调度器</h2>
                 <div class="post-content">
-                    <p>Minecraft 的红石系统是游戏中最有趣的机制之一。通过红石粉、红石火把、比较器等组件，我们可以构建各种复杂的电路。</p>
-                    <h3>基础电路</h3>
-                    <ul>
-                        <li>门电路：与门、或门、非门</li>
-                        <li>存储电路：RS 锁存器、T 触发器</li>
-                        <li>时序电路：脉冲发生器、时钟</li>
-                    </ul>
-                    <h3>实用建议</h3>
-                    <p>1. 规划电路布局时留出足够空间</p>
-                    <p>2. 使用不同颜色的羊毛来标记不同功能区域</p>
-                    <p>3. 复杂电路建议先在单人世界测试</p>
+                    <p>Python 的 <code>async/await</code> 让我们能轻松编写高并发程序。但 <code>asyncio</code> 内部究竟是如何工作的？今天我们不依赖任何第三方库，仅用 Python 原生的<strong>生成器（Generator）</strong>和 <strong><code>select</code> 模块</strong>，从零手写一个单线程高并发事件循环。</p>
+                    
+                    <h3>1. 协程的本质：生成器</h3>
+                    <p>在 Python 中，协程的本质是可以被暂停和恢复执行的函数。生成器中的 <code>yield</code> 完美契合这一特性。我们可以把每个协程包装成一个任务（Task）：</p>
+                    <pre><code>class Task:
+    def __init__(self, coro):
+        self.coro = coro  # 协程对象（生成器）
+        self.value = None # 协程产出的值
+        
+    def run(self):
+        try:
+            # 恢复协程执行，并传入上一次的结果
+            return self.coro.send(self.value)
+        except StopIteration as e:
+            # 协程执行完毕
+            return "FINISHED"</code></pre>
+
+                    <h3>2. 基于 Select 的 I/O 多路复用调度器</h3>
+                    <p>当协程遇到 I/O 阻塞（如 socket 读写）时，我们不能让线程死等，而是要把 socket 注册到操作系统的 <code>select/epoll</code> 中，让出 CPU。当 socket 可读写时，再唤醒对应的协程：</p>
+                    <pre><code>import select
+import socket
+
+class EventLoop:
+    def __init__(self):
+        self.ready_tasks = []  # 就绪任务队列
+        self.read_waiting = {} # socket -> waiting Task 的映射
+
+    def create_task(self, coro):
+        task = Task(coro)
+        self.ready_tasks.append(task)
+        return task
+
+    def run_forever(self):
+        while self.ready_tasks or self.read_waiting:
+            # 1. 如果没有就绪任务，但有等待 I/O 的任务，进行 select 阻塞等待
+            if not self.ready_tasks and self.read_waiting:
+                ready_to_read, _, _ = select.select(self.read_waiting.keys(), [], [])
+                for sock in ready_to_read:
+                    task = self.read_waiting.pop(sock)
+                    self.ready_tasks.append(task)
+
+            # 2. 执行所有就绪任务
+            if self.ready_tasks:
+                task = self.ready_tasks.pop(0)
+                result = task.run()
+                
+                if result == "FINISHED":
+                    continue
+                
+                # 如果任务 yield 了一个 socket，说明它在等待该 socket 的可读事件
+                if isinstance(result, socket.socket):
+                    self.read_waiting[result] = task</code></pre>
+                    <p>通过这种方式，我们用单线程实现了非阻塞 I/O 调度。这就是 <code>asyncio</code>、Node.js 以及 Go 语言 runtime 调度器的核心思想。理解了它，异步编程中的各种 Race Condition 和 Deadlock 也就迎刃而解了。</p>
                 </div>
             </article>
             
-            <article class="blog-post" id="post3">
-                <h2>前端开发中的动画优化技巧</h2>
-                <div class="post-meta">
-                    <span class="post-date">2024-01-05</span>
-                    <span class="post-category">技术</span>
+            <!-- 文章 3 -->
+            <article class="info-section blog-post" id="post3">
+                <div class="post-header">
+                    <span class="post-tag">内存管理</span>
+                    <span class="post-tag">CPython</span>
+                    <span class="post-date">📅 2024-01-05</span>
                 </div>
+                <h2 class="post-title">内存炼金术：Python 垃圾回收机制与引用计数深潜</h2>
                 <div class="post-content">
-                    <p>网页动画可以提升用户体验，但不当的实现会导致性能问题。以下是一些优化建议：</p>
-                    <h3>CSS 动画优化</h3>
+                    <p>很多人说 Python 有垃圾回收（GC），所以不需要关心内存。但在处理海量数据或高频长连接服务时，不合理的内存占用会导致 OOM（内存溢出）。本文带你深潜 CPython 源码，剖析 Python 内存管理的底层逻辑。</p>
+                    
+                    <h3>1. 第一道防线：引用计数（Reference Counting）</h3>
+                    <p>Python 中万物皆对象，每个对象头部都有一个 <code>ob_refcnt</code> 字段。当引用增加时加 1，引用减少时减 1。一旦降为 0，内存立即释放。这种机制实时性极高，但它有一个致命缺陷：<strong>循环引用</strong>。</p>
+                    <pre><code># 循环引用示例：a 和 b 互相引用，即使 del 之后，它们的引用计数依然为 1，导致内存泄漏
+a = []
+b = []
+a.append(b)
+b.append(a)
+del a
+del b</code></pre>
+
+                    <h3>2. 第二道防线：分代回收（Generational GC）</h3>
+                    <p>为了解决循环引用，CPython 引入了标记-清除（Mark and Sweep）算法，并将其划分为三代（0代、1代、2代）。新创建的对象在第0代，经历过 GC 存活下来的对象会晋升到下一代。代数越高，GC 扫描的频率越低。</p>
+                    
+                    <h3>3. 避免内存泄漏的黄金法则</h3>
                     <ul>
-                        <li>使用 transform 和 opacity 属性进行动画，这些属性可以触发 GPU 加速</li>
-                        <li>避免在动画中使用 box-shadow、border-radius 等复杂属性</li>
-                        <li>使用 will-change 属性提前告知浏览器即将进行的动画</li>
+                        <li><strong>善用 <code>weakref</code>（弱引用）</strong>：弱引用不会增加对象的引用计数，是解决缓存和观察者模式中循环引用的利器。</li>
+                        <li><strong>手动控制 GC 阀值</strong>：在内存敏感的密集计算任务中，可以通过 <code>gc.disable()</code> 暂时关闭自动回收，并在合适时机手动调用 <code>gc.collect()</code>。</li>
+                        <li><strong>使用 <code>__slots__</code> 瘦身对象</strong>：默认情况下，Python 实例使用字典 <code>__dict__</code> 存储属性。声明 <code>__slots__</code> 可以阻止动态字典的创建，在需要实例化数百万个小对象时，能节省 70% 以上的内存！</li>
                     </ul>
-                    <h3>JavaScript 动画</h3>
-                    <p>使用 requestAnimationFrame 替代 setTimeout/setInterval 来实现更流畅的动画。</p>
                 </div>
             </article>
         </section>
     </div>
     
     <footer>
-        <div class="container">
-            <p>&copy; 2026 TokiFloat. 保留所有权利。</p>
+        <div class="container footer-container">
+            <p>&copy; 2026 TokiFloat. Designed &amp; Built with ❤️</p>
+            <p class="footer-sub">用代码连接世界，保持热爱，奔赴山海。</p>
         </div>
     </footer>
 </body>
