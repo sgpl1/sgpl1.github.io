@@ -3,19 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人主页 - TokiFloat</title>
+    <title>TokiFloat | 创造有温度的代码</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>你好，我是 TokiFloat</h1>
-            <p>全栈开发工程师 | Python 爱好者 | Minecraft 玩家</p>
+    <!-- 头部 Hero 区域 -->
+    <header class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">Available for Freelance & Collaboration</span>
+                <h1 class="hero-title">你好，我是 <span class="highlight">TokiFloat</span></h1>
+                <p class="hero-subtitle">全栈开发工程师 / 独立开发者 / 终身学习者</p>
+                <p class="hero-description">
+                    专注于构建高性能、高可用且拥有极致用户体验的 Web 应用。在代码与现实之间，用技术创造实用且优雅的数字产品。
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">与我联系</a>
+                    <a href="#projects" class="btn btn-secondary">浏览项目</a>
+                </div>
+            </div>
         </div>
     </header>
     
+    <!-- 导航栏 -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container nav-container">
+            <div class="logo">TokiFloat.dev</div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">首页</a></li>
                 <li><a href="blog.html">博客</a></li>
@@ -25,65 +38,139 @@
         </div>
     </nav>
     
-    <div class="container">
-        <section id="about">
-            <h2>关于我</h2>
-            <div class="about-content">
-                <p>我是一名热爱技术的开发者，专注于创建优雅且实用的数字体验。我相信代码不仅是工具，更是艺术的一种表达形式。</p>
-                <p>在工作中，我注重用户体验和代码质量，喜欢将复杂的问题简化。在闲暇时间，我喜欢玩 Minecraft、阅读、旅行和探索新技术。</p>
-                <p>我精通 Python 语言，经常使用它进行数据分析、自动化脚本编写和后端开发。</p>
+    <div class="container main-content">
+        <!-- 关于我 -->
+        <section id="about" class="info-section">
+            <div class="section-header">
+                <h2>关于我 / About Me</h2>
+                <p class="section-subtitle">探索技术边界，坚持工匠精神</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>我是一名深耕全栈开发领域的工程师。我坚信优秀的软件不仅需要坚固的后端架构，更需要细腻、直观的前端交互。我热衷于解决复杂的技术难题，并将其转化为简单、优雅的用户体验。</p>
+                    <p>在日常开发中，我注重代码质量、自动化测试与持续集成。闲暇之余，我是 Minecraft 的深度玩家，喜欢在红石与方块的世界中探索逻辑之美；同时我也热爱阅读与开源社区，乐于分享自己的所学所得。</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">技术沉淀 (年)</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">20+</span>
+                        <span class="stat-label">开源/个人项目</span>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <section id="skills">
-            <h2>技能专长</h2>
-            <div class="skills">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Vue.js</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">HTML/CSS</span>
-                <span class="skill-tag">UI/UX设计</span>
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">数据库设计</span>
+        <!-- 技能专长 -->
+        <section id="skills" class="info-section">
+            <div class="section-header">
+                <h2>技能版图 / Skills</h2>
+                <p class="section-subtitle">我的技术栈与工具箱</p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>前端开发 / Frontend</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">React / Next.js</span>
+                        <span class="skill-tag">Vue.js / Nuxt</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">HTML5 & CSS3</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>后端与架构 / Backend</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Python (FastAPI/Django)</span>
+                        <span class="skill-tag">Node.js (NestJS)</span>
+                        <span class="skill-tag">RESTful / GraphQL</span>
+                        <span class="skill-tag">PostgreSQL / Redis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>工程与工具 / DevOps</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Git / GitHub Actions</span>
+                        <span class="skill-tag">Docker & K8s</span>
+                        <span class="skill-tag">Linux / Shell</span>
+                        <span class="skill-tag">UI/UX (Figma)</span>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <section id="latest-posts">
-            <h2>最新文章</h2>
-            <div class="posts-preview">
-                <article class="post-preview">
-                    <h3><a href="blog.html#post1">Python 自动化脚本实践</a></h3>
-                    <p>如何使用 Python 编写高效的自动化脚本来提升工作效率...</p>
-                    <span class="post-date">2024-01-15</span>
+        <!-- 最新文章 -->
+        <section id="latest-posts" class="info-section">
+            <div class="section-header">
+                <h2>深度思考 / Blog</h2>
+                <p class="section-subtitle">记录技术成长与生活感悟</p>
+            </div>
+            <div class="posts-grid">
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-date">2024-01-15</span>
+                        <span class="post-tag">Python</span>
+                    </div>
+                    <h3><a href="blog.html#post1">构建现代化的 Python 自动化工作流</a></h3>
+                    <p>探讨如何利用现代 Python 工具链（Poetry, Ruff, GitHub Actions）打造丝滑且健壮的自动化脚本与部署流程...</p>
+                    <a href="blog.html#post1" class="read-more">阅读全文 &rarr;</a>
                 </article>
-                <article class="post-preview">
-                    <h3><a href="blog.html#post2">Minecraft 红石电路设计心得</a></h3>
-                    <p>分享一些有趣的红石电路设计和建筑思路...</p>
-                    <span class="post-date">2024-01-10</span>
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-date">2024-01-10</span>
+                        <span class="post-tag">游戏设计</span>
+                    </div>
+                    <h3><a href="blog.html#post2">Minecraft 红石电路与计算机体系结构</a></h3>
+                    <p>从最基础的红石火把与逻辑门出发，通俗易懂地剖析如何在方块世界中复刻一个微型计算机，感受逻辑的纯粹魅力...</p>
+                    <a href="blog.html#post2" class="read-more">阅读全文 &rarr;</a>
                 </article>
             </div>
         </section>
         
-        <section id="contact">
-            <h2>联系我</h2>
-            <div class="contact-info">
-                <p>📧 邮箱: sgpl@example.com</p>
-                <p>📱 电话: +86 138 0013 8000</p>
-                <p>📍 位置: 中国</p>
-                <div class="social-links">
-                    <a href="https://github.com/sgpl1" class="social-link" target="_blank">GitHub</a>
-                    <a href="https://x.com/sgpl666" class="social-link" target="_blank">X (Twitter)</a>
+        <!-- 联系我 -->
+        <section id="contact" class="info-section contact-section">
+            <div class="section-header">
+                <h2>保持联系 / Contact</h2>
+                <p class="section-subtitle">期待与您的合作、交流或技术探讨</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-card">
+                    <div class="contact-method">
+                        <span class="contact-icon">📧</span>
+                        <div class="contact-details">
+                            <h4>电子邮件</h4>
+                            <p><a href="mailto:sgpl@example.com">sgpl@example.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <span class="contact-icon">📍</span>
+                        <div class="contact-details">
+                            <h4>工作地点</h4>
+                            <p>中国 / 远程办公</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <h3>社交媒体</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/sgpl1" class="social-btn github" target="_blank">
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://x.com/sgpl666" class="social-btn twitter" target="_blank">
+                            <span>X (Twitter)</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
     
     <footer>
-        <div class="container">
-            <p>&copy; 2026 TokiFloat. 保留所有权利。</p>
+        <div class="container footer-container">
+            <p>&copy; 2026 TokiFloat. Designed & Built with ❤️</p>
+            <p class="footer-sub">用代码连接世界，保持热爱，奔赴山海。</p>
         </div>
     </footer>
 </body>
